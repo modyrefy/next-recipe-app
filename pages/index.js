@@ -2,7 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+export default function Home({data}) {
+  const recipes=data.recipes;
+  console.log('recipes'+recipes);
   return (
     <div className={styles.container}>
       <Head>
@@ -49,6 +51,9 @@ export default function Home() {
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
           </a>
+          <p className={styles.card}>
+            {recipes[0].title}
+          </p>
         </div>
       </main>
 
@@ -67,3 +72,15 @@ export default function Home() {
     </div>
   )
 }
+
+export  function getStaticProps(){
+  return {
+    props:{
+      data:{
+        recipes:[
+          {title :"pineapple smoothie"}
+        ]
+      }
+    }
+  };
+};
